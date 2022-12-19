@@ -10,6 +10,9 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    AutocompleteComponent
   ]
 })
 export class SharedModule { }
