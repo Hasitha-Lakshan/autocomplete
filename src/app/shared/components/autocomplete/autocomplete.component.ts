@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { cloneDeep } from "lodash"
 import { debounceTime, Subscription } from 'rxjs';
 import { createPopper } from '@popperjs/core';
+import { Options } from '../../models/auto-complete-model';
 
 @Component({
   selector: 'app-autocomplete',
@@ -19,7 +20,14 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   cursorIndex: number = -1;
 
   @Input() isLoading: boolean = false;
-  @Input() options: any;
+  
+  @Input() options: Options = {
+    label_field: '',
+    description_field: '',
+    value_field: '',
+    check_field: '',
+    placeholder: ''
+  };
 
   @Input() set suggestions(value: any[]) {
     if (value) {

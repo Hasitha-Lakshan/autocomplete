@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Options } from './shared/models/auto-complete-model';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,22 @@ export class AppComponent implements OnInit, OnDestroy {
   isAsync_1: boolean = true;
   isAsync_2: boolean = false;
   results: any[] = [];
+  
+  asyncOptions: Options = {
+    label_field: 'title',
+    description_field: 'country',
+    value_field: 'value',
+    check_field: 'isActive',
+    placeholder: 'Type to begin searching'
+  }
 
-  asyncOptions = { label_field: 'title', description_field: 'country', value_field: 'value', check_field: 'isActive', placeholder: 'Type to begin searching' };
-  syncOptions = { label_field: 'title', description_field: '', value_field: 'value', check_field: 'isActive', placeholder: 'Type to begin searching' };
+  syncOptions: Options = {
+    label_field: 'title',
+    description_field: '',
+    value_field: 'value',
+    check_field: 'isActive',
+    placeholder: 'Type to begin searching'
+  }
 
   asyncSuggestions: any[] = [
     { title: '🇸🇦 Saudi Riyal', country: 'Country: SAR', value: { name: 'SAR', type: 'coin' }, isActive: true },
