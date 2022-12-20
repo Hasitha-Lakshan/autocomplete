@@ -4,5 +4,5 @@ const BASE_URL = environment.apiEndpointUrl;
 
 export const apiEndpoint = {
     allProducts: `${BASE_URL}/products`,
-    productsByTitle: `${BASE_URL}/products?title=json-server&title=`
+    productsByTitle: `${BASE_URL}/products?title_like=`
 };
