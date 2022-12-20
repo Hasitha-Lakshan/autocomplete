@@ -66,6 +66,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // set the drop-down positions
     const reference = document.querySelector('#search') as HTMLElement;
     const popper = document.querySelector('#drop-down') as HTMLElement;
 
@@ -84,6 +85,11 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void { }
 
+  /**
+   * This function use to get the selected items from the list
+   * @param item : selected item
+   * @param isChecked : checkbox value
+   */
   getSelectedItems(item: any, isChecked: boolean) {
     const index = this.selectedItems.findIndex(value => JSON.stringify(item) === JSON.stringify(value));
     if (isChecked) {
@@ -96,7 +102,10 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
     this.results.emit(this.selectedItems);
   }
 
-
+  /**
+   * This function will handle keyboard interaction 
+   * @param event : key events
+   */
   selectByKeys(event: any) {
     switch (event.code) {
       case 'ArrowUp':
@@ -126,6 +135,9 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  /**
+   * This function will debounce and emit the searched keyword
+   */
   asyncSearch() {
     this.isLoading = true;
     this.subscription = this.searchInput.valueChanges.pipe(
@@ -136,6 +148,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
+    // unsubscribe subscription to prevent memory leaks
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

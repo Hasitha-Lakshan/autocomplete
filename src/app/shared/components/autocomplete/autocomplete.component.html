@@ -42,7 +42,7 @@
                             </span>
                         </div>
 
-                        <div class="relative pl-3">
+                        <div *ngIf="options.check_field != ''" class="relative pl-3">
                             <input
                                 class="w-4 h-4 text-teal-600 transition duration-150 ease-in-out form-checkbox cursor-pointer"
                                 type="checkbox" [checked]="item.selected" [disabled]="!item[options.check_field]">
