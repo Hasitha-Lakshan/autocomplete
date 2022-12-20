@@ -18,9 +18,10 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedItems: any[] = [];
   isDisplaySuggestions: boolean = false;
   cursorIndex: number = -1;
+  originalList: any[] = [];
 
   @Input() isLoading: boolean = false;
-  
+
   @Input() options: Options = {
     label_field: '',
     description_field: '',
@@ -31,7 +32,8 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() set suggestions(value: any[]) {
     if (value) {
-      this.suggestionList = cloneDeep(value);
+      this.originalList = value;
+      this.suggestionList = cloneDeep(this.originalList);
     }
   }
 
@@ -145,6 +147,24 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe((value) => {
       this.completeMethod.emit(value);
     });
+  }
+
+  /**
+   * Sync related
+   * This function will filter the data according to the searched key value
+   * @param event : input event
+   */
+  searchData(event: any) {
+    const filterList: any[] = [];
+    this.suggestionList = [];
+
+    this.originalList.forEach(item => {
+      if (item[this.options.label_field].toLowerCase().includes(event.target.value.toLowerCase())) {
+        filterList.push(item);
+      }
+    });
+
+    this.suggestionList = filterList;
   }
 
   ngOnDestroy(): void {
