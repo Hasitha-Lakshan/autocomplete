@@ -9,7 +9,7 @@
             </svg>
         </div>
         <!-- async search input -->
-        <input id="search" type="text" [placeholder]="options?.placeholder" (keyup)="selectByKeys($event)"
+        <input id="search" type="text" [placeholder]="options.placeholder" (keyup)="selectByKeys($event)"
             autocomplete="off" [formControl]="searchInput" (focus)="isDisplaySuggestions = true"
             class="block w-full pl-10 form-input border border-gray-200 sm:text-sm sm:leading-5 rounded-md shadow-sm focus:outline-2 outline-cyan-500">
         <!-- loading spinner -->
