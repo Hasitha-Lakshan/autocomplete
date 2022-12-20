@@ -31,7 +31,7 @@
                 <ng-container *ngFor="let item of suggestionList; index as i">
                     <div role="menuitem"
                         [ngClass]="{ 'pointer-events-none' : !item[options.check_field] ,'bg-cyan-100': i === cursorIndex }"
-                        (click)="item.selected = !item.selected; getSelectedItems(item[options.value_field], item.selected)"
+                        (click)="item.selected = !item.selected; getSelectedItems(item, item.selected)"
                         class="flex items-center justify-between px-4 py-3 leading-5 cursor-pointer focus:outline-none  text-gray-600 bg-white hover:bg-cyan-100 accent-cyan-600">
 
                         <div class="flex flex-col flex-1">

@@ -22,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
   asyncOptions: Options = {
     label_field: 'title',
     description_field: 'brand',
-    value_field: 'data',
     check_field: 'active',
     placeholder: 'Type to begin searching'
   }
@@ -30,7 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
   syncOptions: Options = {
     label_field: 'title',
     description_field: '',
-    value_field: 'data',
     check_field: 'active',
     placeholder: 'Type to begin searching'
   }

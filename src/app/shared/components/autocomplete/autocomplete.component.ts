@@ -25,7 +25,6 @@ export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() options: Options = {
     label_field: '',
     description_field: '',
-    value_field: '',
     check_field: '',
     placeholder: ''
   };
