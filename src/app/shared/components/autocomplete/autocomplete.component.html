@@ -1,1 +1,66 @@
-<p>autocomplete works!</p>
+<div class="relative w-full" #ref>
+    <div class="relative w-full mt-1 rounded-md">
+        <!-- search icon -->
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-400">
+                <path fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </div>
+        <!-- async search input -->
+        <input id="search" type="text" [placeholder]="options?.placeholder" (keyup)="selectByKeys($event)"
+            autocomplete="off" [formControl]="searchInput" (focus)="isDisplaySuggestions = true"
+            class="block w-full pl-10 form-input border border-gray-200 sm:text-sm sm:leading-5 rounded-md shadow-sm focus:outline-2 outline-cyan-500">
+        <!-- loading spinner -->
+        <div *ngIf="async && isLoading" class="absolute inset-y-0 right-0 flex items-center pr-3 space-x-2">
+            <span class="flex items-center justify-center w-5 h-5">
+                <div class="w-full h-full border-2 border-gray-200 rounded-full border-t-gray-400 animate-spin">
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <!-- results drop-down -->
+    <div id="drop-down" class="absolute z-20 w-full rounded-md">
+        <div *ngIf="isDisplaySuggestions" role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
+            class="w-full py-1 overflow-auto bg-white border border-gray-200 rounded-md shadow-md max-h-48">
+            <!-- menu items -->
+            <ng-container *ngIf="suggestionList?.length">
+                <ng-container *ngFor="let item of suggestionList; index as i">
+                    <div role="menuitem"
+                        [ngClass]="{ 'pointer-events-none' : !item[options?.check_field] ,'bg-cyan-100': i === cursorIndex }"
+                        (click)="item.selected = !item.selected; getSelectedItems(item[options?.value_field], item.selected)"
+                        class="flex items-center justify-between px-4 py-3 leading-5 cursor-pointer focus:outline-none  text-gray-600 bg-white hover:bg-cyan-100 accent-cyan-600">
+
+                        <div class="flex flex-col flex-1">
+                            <span *ngIf="options?.label_field" class="text-sm text-gray-600">
+                                {{ item[options?.label_field] }}
+                            </span>
+                            <span *ngIf="options?.description_field" class="text-sm text-gray-500">
+                                {{ item[options?.description_field] }}
+                            </span>
+                        </div>
+
+                        <div class="relative pl-3">
+                            <input
+                                class="w-4 h-4 text-teal-600 transition duration-150 ease-in-out form-checkbox cursor-pointer"
+                                type="checkbox" [checked]="item.selected" [disabled]="!item[options?.check_field]">
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <!-- no menu items -->
+            <ng-container *ngIf="!suggestionList?.length">
+                <div
+                    class="pointer-events-none flex items-center justify-between px-4 py-3 leading-5 cursor-pointer focus:outline-none text-gray-600 bg-white hover:bg-cyan-100 accent-cyan-600">
+                    <div class="flex flex-col flex-1">
+                        <span *ngIf="options?.label_field" class="text-sm text-gray-600">
+                            No results were found
+                        </span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

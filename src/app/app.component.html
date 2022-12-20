@@ -1,1 +1,22 @@
-<app-autocomplete></app-autocomplete>
+<div class="bg-gray-100 flex items-center justify-center w-screen h-screen p-6">
+    <div class="bg-white rounded-md max-w-md p-6 shadow-sm">
+        <div class="flex flex-col items-center justify-center space-y-6">
+            <fieldset class="flex flex-col items-start overflow-visible text-left w-full">
+                <!-- async search -->
+                <ng-container>
+                    <label class="text-sm text-gray-500">Async Search</label>
+                    <app-autocomplete [suggestions]="asyncSuggestions" [options]="asyncOptions" [async]="isAsync_1"
+                        [isLoading]="asyncIsLoading" (completeMethod)="searchByText($event)" (results)="getResults($event)">
+                    </app-autocomplete>
+                </ng-container>
+                <!-- sync search -->
+                <ng-container>
+                    <label class="text-sm text-gray-500 pt-4">Sync Search</label>
+                    <app-autocomplete [suggestions]="syncSuggestions" [options]="syncOptions" [async]="isAsync_2"
+                        [isLoading]="syncIsLoading" (completeMethod)="searchByText($event)" (results)="getResults($event)">
+                    </app-autocomplete>
+                </ng-container>
+            </fieldset>
+        </div>
+    </div>
+</div>
