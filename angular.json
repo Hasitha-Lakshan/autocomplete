@@ -51,8 +51,8 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/app/shared/apis/api-end-points.ts",
-                  "with": "src/app/shared/apis/api-end-points-prod.ts"
+                  "replace": "src/app/shared/end-points/api-end-points.ts",
+                  "with": "src/app/shared/end-points/api-end-points-prod.ts"
                 }
               ],
               "outputHashing": "all"
